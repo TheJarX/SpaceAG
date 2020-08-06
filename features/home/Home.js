@@ -1,9 +1,14 @@
 import React, {useEffect, useState} from 'react';
-import {FAB, Divider, ActivityIndicator} from 'react-native-paper';
+// TODO: learn how identify when is loading to use ActivityIndicator
+import {FAB, Divider} from 'react-native-paper';
 import {SafeAreaView, FlatList, StyleSheet, Text} from 'react-native';
 import {requestGeoPermission, triggerCameraAndTakePhoto} from '../../utils';
 import {useSelector, useDispatch} from 'react-redux';
-import {pictureAdded} from '../pictures/PicturesSlice';
+import {
+  pictureAdded,
+  picturesLoaded,
+  picturesSaved,
+} from '../pictures/PicturesSlice';
 import ListItem from './ListItem';
 
 const renderItem = ({item, pressHandler}) => (
@@ -15,11 +20,13 @@ function Home({navigation}) {
   const [gpsGranted, setGpsGranted] = useState(false);
   const dispatch = useDispatch();
   let data = useSelector((state) => state.picture);
-  // TODO: Add firestore and use this
-  const [isRefreshing, setIsRefreshing] = useState(false);
 
   useEffect(() => {
-    requestGeoPermission().then(setGpsGranted);
+    console.log(data);
+    if (!gpsGranted) {
+      requestGeoPermission().then(setGpsGranted);
+    }
+    dispatch(picturesLoaded());
   }, []);
 
   const pressHandler = (item) => {
@@ -28,6 +35,7 @@ function Home({navigation}) {
 
   const savePicture = (picture) => {
     dispatch(pictureAdded(picture));
+    dispatch(picturesSaved([...data, picture]));
   };
 
   const ListEmptyComponent = () => (
@@ -48,13 +56,9 @@ function Home({navigation}) {
     }
   };
 
-  if (isRefreshing)
-    return <ActivityIndicator animating={true} style={styles.emptyMessage} />;
-
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
-        refreshing={isRefreshing}
         ItemSeparatorComponent={ItemSeparatorComponent}
         ListEmptyComponent={ListEmptyComponent}
         data={data}

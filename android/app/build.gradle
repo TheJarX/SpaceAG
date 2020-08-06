@@ -150,6 +150,12 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
+        release {
+            storeFile file('spaceag_challenge.keystore')
+            storePassword 'spaceagchallenge'
+            keyAlias 'spaceag'
+            keyPassword 'spaceagchallenge'
+        }
     }
     buildTypes {
         debug {
@@ -161,6 +167,7 @@ android {
             signingConfig signingConfigs.debug
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            signingConfig signingConfigs.release
         }
     }
 

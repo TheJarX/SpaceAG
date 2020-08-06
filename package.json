@@ -10,6 +10,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@react-native-community/async-storage": "^1.11.0",
     "@react-native-community/geolocation": "^2.0.2",
     "@react-native-community/masked-view": "^0.1.10",
     "@react-navigation/native": "^5.7.3",
@@ -26,7 +27,7 @@
     "react-native-screens": "^2.9.0",
     "react-native-vector-icons": "^7.0.0",
     "react-redux": "^7.2.1",
-    "react-uid": "^2.3.0",
+    "react-uuid": "^1.0.2",
     "s-ago": "^2.2.0"
   },
   "devDependencies": {
