@@ -1,5 +1,12 @@
-import {createSlice} from '@reduxjs/toolkit';
+import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import {uid} from 'react-uid';
+
+export const picturesLoaded = createAsyncThunk(
+  'picture/picturesLoaded',
+  async () => {
+    console.log('fetching data...');
+  },
+);
 
 const PictureSlice = createSlice({
   name: 'picture',

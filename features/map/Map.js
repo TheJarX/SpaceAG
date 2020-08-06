@@ -16,14 +16,16 @@ const styles = StyleSheet.create({
 });
 
 function MapComponent({latitude, longitude}) {
+  latitude = latitude || 0.56614;
+  longitude = longitude || -51.01177;
   return (
     <View style={styles.container}>
       <MapView
         style={styles.map}
         provider="google"
         region={{
-          latitude: latitude || 0.56614,
-          longitude: longitude || -51.01177,
+          latitude,
+          longitude,
           latitudeDelta: 0.01,
           longitudeDelta: 0.001,
         }}>

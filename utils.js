@@ -1,6 +1,7 @@
 import {PermissionsAndroid} from 'react-native';
 import {DefaultTheme} from 'react-native-paper';
 import ImagePicker from 'react-native-image-picker';
+import Geolocation from '@react-native-community/geolocation';
 
 export const APP_THEME = {
   ...DefaultTheme,
@@ -37,7 +38,10 @@ export const triggerCameraAndTakePhoto = () =>
       } else if (response.error) {
         reject('ImagePicker Error: ', response.error);
       } else {
-        resolve(response);
+        Geolocation.getCurrentPosition((info) => {
+          const {latitude, longitude} = info.coords;
+          resolve({...response, latitude, longitude});
+        });
       }
     });
   });
@@ -55,11 +59,7 @@ export const requestGeoPermission = async () => {
         buttonPositive: 'OK',
       },
     );
-    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-      return true;
-    } else {
-      return false;
-    }
+    return granted === PermissionsAndroid.RESULTS.GRANTED;
   } catch (err) {
     console.warn(err);
   }

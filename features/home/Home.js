@@ -1,28 +1,14 @@
 import React, {useEffect, useState} from 'react';
-import {List, FAB, Divider, ActivityIndicator} from 'react-native-paper';
+import {FAB, Divider, ActivityIndicator} from 'react-native-paper';
 import {SafeAreaView, FlatList, StyleSheet, Text} from 'react-native';
 import {requestGeoPermission, triggerCameraAndTakePhoto} from '../../utils';
-import {dispatch, useSelector, useDispatch} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {pictureAdded} from '../pictures/PicturesSlice';
+import ListItem from './ListItem';
 
-const renderItem = ({item, pressHandler}) => {
-  const {id, title, timestamp} = item;
-  const ago = require('s-ago');
-  const time = ago(new Date(timestamp));
-  console.log('rendering item...' + time);
-  return (
-    <>
-      <List.Item
-        onPress={() => {
-          pressHandler(item);
-        }}
-        title={title}
-        description={time}
-        right={(props) => <List.Icon {...props} icon="arrow-right" />}
-      />
-    </>
-  );
-};
+const renderItem = ({item, pressHandler}) => (
+  <ListItem pressHandler={pressHandler} item={item} />
+);
 
 function Home({navigation}) {
   const {navigate} = navigation;
@@ -31,10 +17,6 @@ function Home({navigation}) {
   let data = useSelector((state) => state.picture);
   // TODO: Add firestore and use this
   const [isRefreshing, setIsRefreshing] = useState(false);
-
-  // useEffect(() => {
-  //   // setIsRefreshing(!isRefreshing);
-  // }, [data]);
 
   useEffect(() => {
     requestGeoPermission().then(setGpsGranted);
