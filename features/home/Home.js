@@ -22,7 +22,6 @@ function Home({navigation}) {
   let data = useSelector((state) => state.picture);
 
   useEffect(() => {
-    console.log(data);
     if (!gpsGranted) {
       requestGeoPermission().then(setGpsGranted);
     }
