@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
-// TODO: learn how identify when is loading to use ActivityIndicator
-import {FAB, Divider} from 'react-native-paper';
+import {FAB, Divider, ActivityIndicator} from 'react-native-paper';
 import {SafeAreaView, FlatList, StyleSheet, Text} from 'react-native';
 import {requestGeoPermission, triggerCameraAndTakePhoto} from '../../utils';
 import {useSelector, useDispatch} from 'react-redux';
@@ -19,7 +18,8 @@ function Home({navigation}) {
   const {navigate} = navigation;
   const [gpsGranted, setGpsGranted] = useState(false);
   const dispatch = useDispatch();
-  let data = useSelector((state) => state.picture);
+  const isFetching = useSelector((state) => state.picture.isFetching);
+  const data = useSelector((state) => state.picture.data);
 
   useEffect(() => {
     if (!gpsGranted) {
@@ -55,9 +55,14 @@ function Home({navigation}) {
     }
   };
 
+  if (isFetching)
+    return <ActivityIndicator animating={true} style={styles.emptyMessage} />;
+
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
+        refreshing={isFetching}
+        progressViewOffset={16}
         ItemSeparatorComponent={ItemSeparatorComponent}
         ListEmptyComponent={ListEmptyComponent}
         data={data}

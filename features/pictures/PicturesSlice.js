@@ -29,17 +29,20 @@ export const picturesSaved = createAsyncThunk(
 
 const PictureSlice = createSlice({
   name: 'picture',
-  initialState: [],
+  initialState: {
+    data: [],
+    isFetching: true,
+  },
   reducers: {
     pictureAdded: (state, {payload}) => {
       payload.id = uuid();
-      payload.title = `Muestra ${state.length + 1}`;
-      state.push(payload);
+      payload.title = `Muestra ${state.data.length + 1}`;
+      state.data.push(payload);
     },
   },
   extraReducers: {
     [picturesLoaded.fulfilled]: (state, {payload}) => {
-      return payload;
+      return {data: payload, isFetching: false};
     },
   },
 });
