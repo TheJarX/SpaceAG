@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import MapView, {Marker} from 'react-native-maps';
 
@@ -15,8 +15,6 @@ const styles = StyleSheet.create({
   },
 });
 
-const markers = [{}];
-
 function MapComponent({latitude, longitude}) {
   return (
     <View style={styles.container}>
@@ -24,8 +22,8 @@ function MapComponent({latitude, longitude}) {
         style={styles.map}
         provider="google"
         region={{
-          latitude,
-          longitude,
+          latitude: latitude || 0.56614,
+          longitude: longitude || -51.01177,
           latitudeDelta: 0.01,
           longitudeDelta: 0.001,
         }}>
