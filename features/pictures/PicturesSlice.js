@@ -7,7 +7,7 @@ const PictureSlice = createSlice({
   reducers: {
     pictureAdded: (state, {payload}) => {
       payload.id = uid(payload);
-      payload.title = `Sample ${state.length + 1}`;
+      payload.title = `Muestra ${state.length + 1}`;
       state.push(payload);
     },
   },

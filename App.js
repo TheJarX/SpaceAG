@@ -20,7 +20,6 @@ const App: () => React$Node = () => {
       <Stack.Navigator screenOptions={screenOptions}>
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Details" component={SampleDetails} />
-        {/* <Stack.Screen name="Camera" component={Camera} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );

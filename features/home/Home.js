@@ -4,7 +4,6 @@ import {SafeAreaView, FlatList, StyleSheet, Text} from 'react-native';
 import {requestGeoPermission, triggerCameraAndTakePhoto} from '../../utils';
 import {dispatch, useSelector, useDispatch} from 'react-redux';
 import {pictureAdded} from '../pictures/PicturesSlice';
-// import {pictureAdded} from '../pictures/PicturesSlice';
 
 const renderItem = ({item, pressHandler}) => {
   const {id, title, timestamp} = item;

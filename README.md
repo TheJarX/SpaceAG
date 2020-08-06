@@ -1,4 +1,4 @@
-# SpaceAG reac dev challenge
+# SpaceAG react dev challenge
 
 ### About tests:
 
