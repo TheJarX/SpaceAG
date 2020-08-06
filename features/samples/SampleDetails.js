@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {Text, Image, StyleSheet, ScrollView} from 'react-native';
+import {Text, StyleSheet, ScrollView} from 'react-native';
 import {Card} from 'react-native-paper';
 import {APP_THEME} from '../../utils';
 import MapComponent from '../map/Map';

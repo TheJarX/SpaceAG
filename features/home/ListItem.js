@@ -10,8 +10,8 @@ function ListItem({item, pressHandler}) {
   useEffect(() => {
     setInterval(() => {
       setTime(ago(new Date(timestamp)));
-    }, 60000); // every minute
-  }, [time]);
+    }, 30000); // every 30s
+  }, []);
 
   return (
     <List.Item
