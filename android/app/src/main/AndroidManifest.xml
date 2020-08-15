@@ -32,7 +32,7 @@
       </activity>
       <meta-data
         android:name="com.google.android.geo.API_KEY"
-        android:value="AIzaSyCtTFeY3nBKV1H5SrTFdUJKB7nEwxdPZzI"/>
+        android:value="YOUR_API_KEY"/>
       <uses-library android:name="org.apache.http.legacy" android:required="false"/>
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
     </application>
